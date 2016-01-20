@@ -1,16 +1,12 @@
 package ru.drsk.httptest2;
 
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.TextView;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -32,19 +28,22 @@ public class TestJsoupExample extends AppCompatActivity {
     public static final String URl = "https://lk.drsk.ru/tp/userlog.php";
     private List<String> tableData;
     private GridView table;
-    private TableAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_jsoup);
-        table = (GridView) findViewById(R.id.table);
-        table.setScrollContainer(true);
+        table = (GridView) findViewById(R.id.gridview);
         new AsynTaskNetwokrRequest().execute();
 
     }
 
     class AsynTaskNetwokrRequest extends AsyncTask<Void, Void, Document> {
+        ProgressDialog dialog;
+        @Override
+        protected void onPreExecute() {
+            dialog = ProgressDialog.show(TestJsoupExample.this,  "В процессе", null);
+        }
 
         @Override
         protected Document doInBackground(Void... params) {
@@ -59,8 +58,10 @@ public class TestJsoupExample extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Document document) {
-            //Log.d("TEST: ", document.toString());
-            adapter = new TableAdapter(TestJsoupExample.this, R.layout.table_cell, parse(document));
+            if(dialog != null){
+                dialog.dismiss();
+            }
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, parse(document));
             table.setAdapter(adapter);
 
         }
@@ -89,7 +90,7 @@ public class TestJsoupExample extends AppCompatActivity {
         //Log.d("TEST: ", el.toString());
         for (int i = 0; i < el.size(); i++) {
             for (int j = 0; j < el.size(); j++) {
-                if (j == 1 || j == 3 || j == 8) {
+                if (j == 8) {
                     Log.d("New : ", el.get(i).child(j).text());
                     tableData.add(el.get(i).child(j).text());
                 }
@@ -98,51 +99,5 @@ public class TestJsoupExample extends AppCompatActivity {
         return tableData;
     }
 
-    public static class TableAdapter extends ArrayAdapter<String> {
-
-        Context context;
-        LayoutInflater inflater;
-        List<String> list;
-        int resourceId;
-
-        public TableAdapter(Context context, int resource, List<String> list) {
-            super(context, resource, list);
-            this.list = list;
-            this.context = context;
-            resourceId = resource;
-
-
-        }
-
-        @Override
-        public String getItem(int position) {
-            return super.getItem(position);
-        }
-
-        @Override
-        public int getPosition(String item) {
-            return super.getPosition(item);
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder;
-            if (convertView == null) {
-                inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(R.layout.table_cell, null);
-                holder = new ViewHolder();
-                holder.text = (TextView) convertView.findViewById(R.id.cell);
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-            holder.text.setText(getItem(position));
-            return convertView;
-        }
-
-        public static class ViewHolder {
-            TextView text;
-        }
-    }
-
 }
+
