@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -15,6 +16,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+
+import java.io.IOException;
 
 
 /**
@@ -27,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btnAuth;
     public static final String EXTRA_SNILS = "extra_snils";
     public static final String EXTRA_PASSWORD = "extra_password";
+    private String snils;
+    private String password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,12 +79,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if(checkNetwork(getApplicationContext())){
-                String snils = inpSnils.getText().toString();
-                String password = inpPassword.getText().toString();
-                Intent intent = new Intent(MainActivity.this, TestJsoupExample.class);
-                intent.putExtra(EXTRA_SNILS, snils);
-                intent.putExtra(EXTRA_PASSWORD, password);
-                startActivity(intent);
+                snils = inpSnils.getText().toString();
+                password = inpPassword.getText().toString();
+                new AsyncCheckLogin().execute();
+
             }else{
                 Toast.makeText(getApplicationContext(), "Нет соединения с интернетом", Toast.LENGTH_SHORT)
                         .show();
@@ -96,5 +102,44 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+    private boolean checkLogin() throws IOException {
+        Connection.Response res = Jsoup.connect(TestJsoupExample.URl)
+                .data("user_login", snils, "user_password", password)
+                .data("stat", "1")
+                .data("flag", "1")
+                .timeout(0)
+                .method(Connection.Method.POST)
+                .execute();
+        if(!TestJsoupExample.URl_USER.equals(res.url().toString())){
+            return false;
+        }
+        return true;
+    }
+    public class AsyncCheckLogin extends AsyncTask<Void, Void, Boolean>{
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            boolean success = false;
+            try {
+               success = checkLogin();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return success;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            if(aBoolean){
+                Intent intent = new Intent(MainActivity.this, TestJsoupExample.class);
+                intent.putExtra(EXTRA_SNILS, snils);
+                intent.putExtra(EXTRA_PASSWORD, password);
+                startActivity(intent);
+            }else {
+                Toast.makeText(getApplicationContext(), "Неверный логин или пароль", Toast.LENGTH_SHORT)
+                    .show();
+            }
+        }
     }
 }

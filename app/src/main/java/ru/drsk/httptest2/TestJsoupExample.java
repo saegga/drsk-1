@@ -29,6 +29,7 @@ public class TestJsoupExample extends AppCompatActivity {
 
 
     public static final String URl = "https://lk.drsk.ru/tp/userlog.php";
+    public static final String URl_USER = "https://lk.drsk.ru/tp/user.php";
     private List<String> tableData;
     private RecyclerView table;
     private ProgressDialog dialog;
@@ -98,6 +99,7 @@ public class TestJsoupExample extends AppCompatActivity {
                 .method(Connection.Method.POST)
                 .execute();
 
+        Log.d("Res: ", res.parse().text());
         String sessionId = res.cookie("PHPSESSID");
         doc = Jsoup.connect("https://lk.drsk.ru/tp/user.php")
                 .cookie("PHPSESSID", sessionId)
