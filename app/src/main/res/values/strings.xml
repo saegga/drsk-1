@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">HttpTest2</string>
+    <string name="snils">Ваш снилс</string>
+    <string name="password">Пароль</string>
+    <string name="btn_input">Войти</string>
+    <string name="snils_hint">XXX-XXX-XXX XX</string>
+    <string name="format_snils">В формате 123-456-789 01:</string>
+    <string name="snils_format"></string>
+
+
 </resources>

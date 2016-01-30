@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/HttpTest2.iml" filepath="$PROJECT_DIR$/HttpTest2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/commons-codec-1.9/commons-codec-1.9.iml" filepath="$PROJECT_DIR$/commons-codec-1.9/commons-codec-1.9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/drsk-1.iml" filepath="$PROJECT_DIR$/drsk-1.iml" />
     </modules>
   </component>
 </project>

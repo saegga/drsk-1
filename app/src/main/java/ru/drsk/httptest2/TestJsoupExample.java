@@ -1,10 +1,6 @@
 package ru.drsk.httptest2;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,23 +10,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.TextView;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -38,8 +27,7 @@ import java.util.Map;
  */
 public class TestJsoupExample extends AppCompatActivity {
 
-    public static final String LOGIN = "000-000-000 00";
-    public static final String PASSWORD = "111111";
+
     public static final String URl = "https://lk.drsk.ru/tp/userlog.php";
     private List<String> tableData;
     private RecyclerView table;
@@ -52,11 +40,14 @@ public class TestJsoupExample extends AppCompatActivity {
         tableData = new ArrayList<>();
         table = (RecyclerView) findViewById(R.id.grid);
         table.setLayoutManager(new GridLayoutManager(this, 3));
-        new AsynTaskNetwokrRequest().execute();
+
+        String snils = getIntent().getStringExtra(MainActivity.EXTRA_SNILS);
+        String password = getIntent().getStringExtra(MainActivity.EXTRA_PASSWORD);
+        new AsyncTaskNetworkRequest().execute(snils, password);
 
     }
 
-    class AsynTaskNetwokrRequest extends AsyncTask<Void, Void, Document> {
+    class AsyncTaskNetworkRequest extends AsyncTask<String, Void, Document> {
 
         @Override
         protected void onPreExecute() {
@@ -64,10 +55,12 @@ public class TestJsoupExample extends AppCompatActivity {
         }
 
         @Override
-        protected Document doInBackground(Void... params) {
+        protected Document doInBackground(String... params) {
             Document doc = null;
             try {
-                doc = authSite();
+                String snils = params[0];
+                String pass = params[1];
+                doc = authSite(snils, pass);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -95,10 +88,10 @@ public class TestJsoupExample extends AppCompatActivity {
     }
 
 
-    public Document authSite() throws IOException {
+    public Document authSite(String snils, String pass) throws IOException {
         Document doc;
         Connection.Response res = Jsoup.connect(URl)
-                .data("user_login", LOGIN, "user_password", PASSWORD)
+                .data("user_login", snils, "user_password", pass)
                 .data("stat", "1")
                 .data("flag", "1")
                 .timeout(0)
@@ -138,7 +131,7 @@ public class TestJsoupExample extends AppCompatActivity {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.text, parent, false);
+                    .inflate(R.layout.table_cell, parent, false);
             ViewHolder holder = new ViewHolder(view);
             return holder;
         }
