@@ -1,6 +1,8 @@
 package ru.drsk.httptest2;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -30,6 +31,7 @@ public class TestJsoupExample extends AppCompatActivity {
 
     public static final String URl = "https://lk.drsk.ru/tp/userlog.php";
     public static final String URl_USER = "https://lk.drsk.ru/tp/user.php";
+    public static final String PHP_SEISSION_ID = "PHPSESSID";
     private List<String> tableData;
     private RecyclerView table;
     private ProgressDialog dialog;
@@ -41,10 +43,11 @@ public class TestJsoupExample extends AppCompatActivity {
         tableData = new ArrayList<>();
         table = (RecyclerView) findViewById(R.id.grid);
         table.setLayoutManager(new GridLayoutManager(this, 3));
-
-        String snils = getIntent().getStringExtra(MainActivity.EXTRA_SNILS);
-        String password = getIntent().getStringExtra(MainActivity.EXTRA_PASSWORD);
-        new AsyncTaskNetworkRequest().execute(snils, password);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setTitle("Личный кабинет");
+        }
+        String sessionId = getIntent().getStringExtra(MainActivity.EXTRA_PHP_SESSION);
+        new AsyncTaskNetworkRequest().execute(sessionId);
 
     }
 
@@ -59,9 +62,8 @@ public class TestJsoupExample extends AppCompatActivity {
         protected Document doInBackground(String... params) {
             Document doc = null;
             try {
-                String snils = params[0];
-                String pass = params[1];
-                doc = authSite(snils, pass);
+                String sessionId = params[0];
+                doc = getHtml(sessionId);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -89,20 +91,10 @@ public class TestJsoupExample extends AppCompatActivity {
     }
 
 
-    public Document authSite(String snils, String pass) throws IOException {
+    public Document getHtml(String sessId) throws IOException {
         Document doc;
-        Connection.Response res = Jsoup.connect(URl)
-                .data("user_login", snils, "user_password", pass)
-                .data("stat", "1")
-                .data("flag", "1")
-                .timeout(0)
-                .method(Connection.Method.POST)
-                .execute();
-
-        Log.d("Res: ", res.parse().text());
-        String sessionId = res.cookie("PHPSESSID");
         doc = Jsoup.connect("https://lk.drsk.ru/tp/user.php")
-                .cookie("PHPSESSID", sessionId)
+                .cookie(PHP_SEISSION_ID, sessId)
                 .timeout(0)
                 .get();
         return doc;
@@ -141,6 +133,11 @@ public class TestJsoupExample extends AppCompatActivity {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
         holder.cellText.setText(items.get(position));
+//            if(holder.getAdapterPosition() < 3){
+//                holder.cellText.setForeground(new ColorDrawable(Color.parseColor("#DDEECC")));
+//            }else{
+//                holder.cellText.set(new ColorDrawable(Color.parseColor("#DDEECC")));
+//            }
         }
 
         @Override
@@ -156,6 +153,7 @@ public class TestJsoupExample extends AppCompatActivity {
                 cellText = (TextView) itemView.findViewById(R.id.cell);
             }
         }
+
     }
 }
 

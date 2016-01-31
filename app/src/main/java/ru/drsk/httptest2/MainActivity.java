@@ -31,8 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText inpSnils;
     private EditText inpPassword;
     private Button btnAuth;
-    public static final String EXTRA_SNILS = "extra_snils";
-    public static final String EXTRA_PASSWORD = "extra_password";
+    public static final String EXTRA_PHP_SESSION = "extra_php_session";
     private String snils;
     private String password;
     @Override
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 snils = inpSnils.getText().toString();
                 password = inpPassword.getText().toString();
                 new AsyncCheckLogin().execute();
-
+                v.setClickable(false);
             }else{
                 Toast.makeText(getApplicationContext(), "Нет соединения с интернетом", Toast.LENGTH_SHORT)
                         .show();
@@ -103,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
-    private boolean checkLogin() throws IOException {
+    private String checkLogin() throws IOException {
         Connection.Response res = Jsoup.connect(TestJsoupExample.URl)
                 .data("user_login", snils, "user_password", password)
                 .data("stat", "1")
@@ -112,33 +111,36 @@ public class MainActivity extends AppCompatActivity {
                 .method(Connection.Method.POST)
                 .execute();
         if(!TestJsoupExample.URl_USER.equals(res.url().toString())){
-            return false;
+            return null;
         }
-        return true;
+        return res.cookie(TestJsoupExample.PHP_SEISSION_ID);
     }
-    public class AsyncCheckLogin extends AsyncTask<Void, Void, Boolean>{
+    public class AsyncCheckLogin extends AsyncTask<Void, Void, String>{
 
         @Override
-        protected Boolean doInBackground(Void... params) {
-            boolean success = false;
+        protected String doInBackground(Void... params) {
+            String sessionId = null;
             try {
-               success = checkLogin();
+                sessionId = checkLogin();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return success;
+            return sessionId;
         }
 
         @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            if(aBoolean){
+        protected void onPostExecute(String session) {
+            if(session != null){
+                //btnAuth.setEnabled(false);
                 Intent intent = new Intent(MainActivity.this, TestJsoupExample.class);
-                intent.putExtra(EXTRA_SNILS, snils);
-                intent.putExtra(EXTRA_PASSWORD, password);
+                intent.putExtra(EXTRA_PHP_SESSION, session);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }else {
                 Toast.makeText(getApplicationContext(), "Неверный логин или пароль", Toast.LENGTH_SHORT)
                     .show();
+                btnAuth.setClickable(true);
             }
         }
     }

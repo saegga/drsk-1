@@ -6,6 +6,7 @@
     <string name="snils_hint">XXX-XXX-XXX XX</string>
     <string name="format_snils">В формате 123-456-789 01:</string>
     <string name="snils_format"></string>
+    <string name="title_table">Ваши заявки</string>
 
 
 </resources>
