@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -103,12 +105,12 @@ public class TestJsoupExample extends AppCompatActivity {
     private List<String> parse(Document doc) {
         tableData = new ArrayList<>();
         Elements el = doc.select("table.agree_color_no_bottom tr");
-        //Log.d("TEST: ", el.toString());
+
         for (int i = 0; i < el.size(); i++) {
             for (int j = 0; j < el.size(); j++) {
                 if (j==1 ||j == 3 || j == 8) {
                     Log.d("New : ", el.get(i).child(j).text());
-                    tableData.add(el.get(i).child(j).text());
+                    tableData.add(el.get(i).child(j).getElementsByTag("td").html());
                 }
             }
         }
@@ -132,12 +134,7 @@ public class TestJsoupExample extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.cellText.setText(items.get(position));
-//            if(holder.getAdapterPosition() < 3){
-//                holder.cellText.setForeground(new ColorDrawable(Color.parseColor("#DDEECC")));
-//            }else{
-//                holder.cellText.set(new ColorDrawable(Color.parseColor("#DDEECC")));
-//            }
+        holder.cellText.setText(Html.fromHtml(items.get(position)));
         }
 
         @Override
@@ -151,6 +148,7 @@ public class TestJsoupExample extends AppCompatActivity {
             public ViewHolder(View itemView) {
                 super(itemView);
                 cellText = (TextView) itemView.findViewById(R.id.cell);
+                cellText.setMovementMethod(LinkMovementMethod.getInstance());
             }
         }
 
@@ -158,4 +156,4 @@ public class TestJsoupExample extends AppCompatActivity {
 }
 
 
-
+//// TODO: 02.02.2016 сделать ссылки
