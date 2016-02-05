@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * Created by 29979 on 03.01.2016.
  */
-public class TableStatus extends AppCompatActivity {
+public class TableStatusActivity extends AppCompatActivity {
 
 
     public static final String URl = "https://lk.drsk.ru/tp/userlog.php";
@@ -39,7 +39,7 @@ public class TableStatus extends AppCompatActivity {
     private RecyclerView table;
     private ProgressDialog dialog;
     private TableAdapter adapter;
-    private String sessionId; // нужен ли класс сингл для доступа к сессии?
+    private Session session = Session.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +50,8 @@ public class TableStatus extends AppCompatActivity {
         if(getSupportActionBar() != null){
             getSupportActionBar().setTitle("Личный кабинет");
         }
-        sessionId = getIntent().getStringExtra(MainActivity.EXTRA_PHP_SESSION);
-        new AsyncTaskNetworkRequest().execute(sessionId);
+        session.setSessionId(getIntent().getStringExtra(MainActivity.EXTRA_PHP_SESSION));
+        new AsyncTaskNetworkRequest().execute(session.getSessionId());
 
     }
 
@@ -66,7 +66,7 @@ public class TableStatus extends AppCompatActivity {
         protected Document doInBackground(String... params) {
             Document doc = null;
             try {
-                sessionId = params[0];
+                String sessionId = params[0];
                 doc = getHtml(sessionId);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -76,7 +76,7 @@ public class TableStatus extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Document document) {
-            if(!TableStatus.this.isDestroyed()){
+            if(!TableStatusActivity.this.isDestroyed()){
                dismissDialog();
            }
                 tableData = parse(document);
@@ -85,7 +85,7 @@ public class TableStatus extends AppCompatActivity {
         }
     }
     private void showDialog(){
-        dialog = new ProgressDialog(TableStatus.this);
+        dialog = new ProgressDialog(TableStatusActivity.this);
         dialog.show();
     }
     private void dismissDialog(){
@@ -125,7 +125,7 @@ public class TableStatus extends AppCompatActivity {
         }
         return tableData;
     }
-    public static class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder>{
+    public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder>{
 
         List<TextElement> items = new ArrayList<>();
         Context context;

@@ -102,17 +102,17 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
     private String checkLogin() throws IOException {
-        Connection.Response res = Jsoup.connect(TableStatus.URl)
+        Connection.Response res = Jsoup.connect(TableStatusActivity.URl)
                 .data("user_login", snils, "user_password", password)
                 .data("stat", "1")
                 .data("flag", "1")
                 .timeout(0)
                 .method(Connection.Method.POST)
                 .execute();
-        if(!TableStatus.URl_USER.equals(res.url().toString())){
+        if(!TableStatusActivity.URl_USER.equals(res.url().toString())){
             return null;
         }
-        return res.cookie(TableStatus.PHP_SEISSION_ID);
+        return res.cookie(TableStatusActivity.PHP_SEISSION_ID);
     }
     public class AsyncCheckLogin extends AsyncTask<Void, Void, String>{
 
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String session) {
             if(session != null){
                 //btnAuth.setEnabled(false);
-                Intent intent = new Intent(MainActivity.this, TableStatus.class);
+                Intent intent = new Intent(MainActivity.this, TableStatusActivity.class);
                 intent.putExtra(EXTRA_PHP_SESSION, session);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
