@@ -1,8 +1,6 @@
 package ru.drsk.httptest2;
 
 import android.app.ProgressDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
@@ -22,9 +21,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -36,9 +33,7 @@ public class TestJsoupExample extends AppCompatActivity {
     public static final String URl = "https://lk.drsk.ru/tp/userlog.php";
     public static final String URl_USER = "https://lk.drsk.ru/tp/user.php";
     public static final String PHP_SEISSION_ID = "PHPSESSID";
-    private List<String> tableData;
-    private List<TextElement> test;
-    private Map<String, String> map = new HashMap<>();
+    private List<TextElement> tableData;
     private RecyclerView table;
     private ProgressDialog dialog;
     private TableAdapter adapter;
@@ -106,10 +101,10 @@ public class TestJsoupExample extends AppCompatActivity {
         return doc;
     }
 
-    private List<String> parse(Document doc) {
+    private List<TextElement> parse(Document doc) {
         //tableData = new ArrayList<>();
         Elements el = doc.select("table.agree_color_no_bottom tr");
-        test = new ArrayList<>();
+        tableData = new ArrayList<>();
         for (int i = 0; i < el.size(); i++) {
             for (int j = 0; j < el.size(); j++) {
                 if (j==1 || j == 3 || j == 8) {
@@ -118,9 +113,9 @@ public class TestJsoupExample extends AppCompatActivity {
                     if(j == 8 && el.get(i).child(j).getElementsByTag("td").html().contains("start_user_file")){
                         String flagUserFile = el.get(i).child(j).getElementsByTag("td").select("form").select("input").get(1).attr("value");
                         String idZayav = el.get(i).child(j).getElementsByTag("td").select("form").select("input").get(2).attr("value");
-                        test.add(new TextElement(text, true, flagUserFile, idZayav));
+                        tableData.add(new TextElement(text, true, flagUserFile, idZayav));
                     }else{
-                        test.add(new TextElement(text, false));
+                        tableData.add(new TextElement(text, false));
                     }
                 }
             }
@@ -129,10 +124,9 @@ public class TestJsoupExample extends AppCompatActivity {
     }
     public static class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder>{
 
-        List<String> items = new ArrayList<>();
-        List<TextElement> testItem = new ArrayList<>();
+        List<TextElement> items = new ArrayList<>();
 
-        public TableAdapter(List<String> items) {
+        public TableAdapter(List<TextElement> items) {
             this.items = items;
         }
 
@@ -145,8 +139,19 @@ public class TestJsoupExample extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.cellText.setText(Html.fromHtml(items.get(position)));
+        public void onBindViewHolder(ViewHolder holder, final int position) {
+        holder.cellText.setText(Html.fromHtml(items.get(position).getText()));
+            if(items.get(position).isHasButton()){
+                holder.addFile.setVisibility(View.VISIBLE);
+                holder.addFile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+            }else{
+                holder.addFile.setVisibility(View.GONE);
+            }
         }
 
         @Override
@@ -156,16 +161,14 @@ public class TestJsoupExample extends AppCompatActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             TextView cellText;
-
+            Button addFile;
             public ViewHolder(View itemView) {
                 super(itemView);
                 cellText = (TextView) itemView.findViewById(R.id.cell);
                 cellText.setMovementMethod(LinkMovementMethod.getInstance());
+                addFile = (Button) itemView.findViewById(R.id.btn_add_files);
             }
         }
-
     }
 }
 
-
-//// TODO: 02.02.2016 сделать ссылки

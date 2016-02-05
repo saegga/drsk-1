@@ -8,4 +8,5 @@
     <color name="format_snils">#3546ca</color>
     <color name="corner_color">#73C8F0</color>
     <color name="bg_first_line">#DDEECC</color>
+    <color name="text_btn_add_file">#0066CC</color>
 </resources>

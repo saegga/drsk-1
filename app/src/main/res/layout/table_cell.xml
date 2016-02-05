@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/corner"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <TextView
@@ -14,15 +15,19 @@
         android:layout_height="match_parent"
         android:layout_margin="1dp"
         android:padding="3dp"
-        android:background="@drawable/corner">
-    </TextView>
+        />
     <Button
-        android:id="@+id/test"
+        android:id="@+id/btn_add_files"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:visibility="gone"
-        android:text="добавить файлы"/>
+        android:text="@string/add_file"
+        android:background="@drawable/button_add_file"
+        android:textColor="@color/text_btn_add_file"
+        android:textSize="10sp"
+        android:layout_margin="5dp"
+        />
 
 </LinearLayout>
 

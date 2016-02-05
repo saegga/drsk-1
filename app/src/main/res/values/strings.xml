@@ -7,6 +7,7 @@
     <string name="format_snils">В формате 123-456-789 01:</string>
     <string name="snils_format"></string>
     <string name="title_table">Ваши заявки</string>
+    <string name="add_file">добавить файлы</string>
 
 
 </resources>

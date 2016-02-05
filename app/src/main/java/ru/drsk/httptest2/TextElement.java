@@ -5,9 +5,9 @@ package ru.drsk.httptest2;
  */
 public class TextElement {
     private String text;
-    boolean hasButton;
-    String flagUserFile;
-    String idZaiv;
+    private boolean hasButton;
+    private String flagUserFile;
+    private String idZaiv;
 
     public TextElement(String text, boolean hasButton) {
         this.text = text;
