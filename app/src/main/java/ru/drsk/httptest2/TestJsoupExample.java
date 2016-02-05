@@ -22,7 +22,9 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -35,6 +37,8 @@ public class TestJsoupExample extends AppCompatActivity {
     public static final String URl_USER = "https://lk.drsk.ru/tp/user.php";
     public static final String PHP_SEISSION_ID = "PHPSESSID";
     private List<String> tableData;
+    private List<TextElement> test;
+    private Map<String, String> map = new HashMap<>();
     private RecyclerView table;
     private ProgressDialog dialog;
     private TableAdapter adapter;
@@ -103,14 +107,21 @@ public class TestJsoupExample extends AppCompatActivity {
     }
 
     private List<String> parse(Document doc) {
-        tableData = new ArrayList<>();
+        //tableData = new ArrayList<>();
         Elements el = doc.select("table.agree_color_no_bottom tr");
-
+        test = new ArrayList<>();
         for (int i = 0; i < el.size(); i++) {
             for (int j = 0; j < el.size(); j++) {
-                if (j==1 ||j == 3 || j == 8) {
+                if (j==1 || j == 3 || j == 8) {
                     Log.d("New : ", el.get(i).child(j).text());
-                    tableData.add(el.get(i).child(j).getElementsByTag("td").html());
+                    String text = el.get(i).child(j).getElementsByTag("td").html();
+                    if(j == 8 && el.get(i).child(j).getElementsByTag("td").html().contains("start_user_file")){
+                        String flagUserFile = el.get(i).child(j).getElementsByTag("td").select("form").select("input").get(1).attr("value");
+                        String idZayav = el.get(i).child(j).getElementsByTag("td").select("form").select("input").get(2).attr("value");
+                        test.add(new TextElement(text, true, flagUserFile, idZayav));
+                    }else{
+                        test.add(new TextElement(text, false));
+                    }
                 }
             }
         }
@@ -119,6 +130,7 @@ public class TestJsoupExample extends AppCompatActivity {
     public static class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder>{
 
         List<String> items = new ArrayList<>();
+        List<TextElement> testItem = new ArrayList<>();
 
         public TableAdapter(List<String> items) {
             this.items = items;
