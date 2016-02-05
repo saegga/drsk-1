@@ -37,4 +37,11 @@ public class TextElement {
         this.hasButton = hasButton;
     }
 
+    public String getFlagUserFile() {
+        return flagUserFile;
+    }
+
+    public String getIdZaiv() {
+        return idZaiv;
+    }
 }

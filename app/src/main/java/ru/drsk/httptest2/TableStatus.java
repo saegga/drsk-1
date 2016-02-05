@@ -1,6 +1,8 @@
 package ru.drsk.httptest2;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +29,7 @@ import java.util.List;
 /**
  * Created by 29979 on 03.01.2016.
  */
-public class TestJsoupExample extends AppCompatActivity {
+public class TableStatus extends AppCompatActivity {
 
 
     public static final String URl = "https://lk.drsk.ru/tp/userlog.php";
@@ -37,6 +39,7 @@ public class TestJsoupExample extends AppCompatActivity {
     private RecyclerView table;
     private ProgressDialog dialog;
     private TableAdapter adapter;
+    private String sessionId; // нужен ли класс сингл для доступа к сессии?
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +50,7 @@ public class TestJsoupExample extends AppCompatActivity {
         if(getSupportActionBar() != null){
             getSupportActionBar().setTitle("Личный кабинет");
         }
-        String sessionId = getIntent().getStringExtra(MainActivity.EXTRA_PHP_SESSION);
+        sessionId = getIntent().getStringExtra(MainActivity.EXTRA_PHP_SESSION);
         new AsyncTaskNetworkRequest().execute(sessionId);
 
     }
@@ -63,7 +66,7 @@ public class TestJsoupExample extends AppCompatActivity {
         protected Document doInBackground(String... params) {
             Document doc = null;
             try {
-                String sessionId = params[0];
+                sessionId = params[0];
                 doc = getHtml(sessionId);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -73,16 +76,16 @@ public class TestJsoupExample extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Document document) {
-            if(!TestJsoupExample.this.isDestroyed()){
+            if(!TableStatus.this.isDestroyed()){
                dismissDialog();
            }
                 tableData = parse(document);
-                adapter = new TableAdapter(tableData);
+                adapter = new TableAdapter(tableData, getApplicationContext());
                 table.setAdapter(adapter);
         }
     }
     private void showDialog(){
-        dialog = new ProgressDialog(TestJsoupExample.this);
+        dialog = new ProgressDialog(TableStatus.this);
         dialog.show();
     }
     private void dismissDialog(){
@@ -125,8 +128,10 @@ public class TestJsoupExample extends AppCompatActivity {
     public static class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder>{
 
         List<TextElement> items = new ArrayList<>();
+        Context context;
 
-        public TableAdapter(List<TextElement> items) {
+        public TableAdapter(List<TextElement> items, Context context) {
+            this.context = context;
             this.items = items;
         }
 
@@ -146,7 +151,11 @@ public class TestJsoupExample extends AppCompatActivity {
                 holder.addFile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        Intent intent = new Intent(context.getApplicationContext(), ActivityAddFile.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra(ActivityAddFile.FLAG_ID_ZAYAV, items.get(position).getIdZaiv());
+                        intent.putExtra(ActivityAddFile.FLAG_USER_FILE, items.get(position).getFlagUserFile());
+                        context.startActivity(intent);
                     }
                 });
             }else{
