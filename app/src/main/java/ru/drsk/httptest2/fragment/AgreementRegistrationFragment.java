@@ -3,7 +3,7 @@ package ru.drsk.httptest2.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +46,7 @@ public class AgreementRegistrationFragment extends Fragment {
         btnResume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Registr: ", "true");
+                initNextFragment();
             }
         });
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +55,13 @@ public class AgreementRegistrationFragment extends Fragment {
                 getActivity().finish();
             }
         });
-
         return view;
+    }
+    public void initNextFragment(){
+        FragmentManager manager = getFragmentManager();
+        manager.beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.registr_container_fragment, new RegistrationFragment())
+                .commit();
     }
 }

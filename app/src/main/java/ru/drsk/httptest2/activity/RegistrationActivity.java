@@ -33,5 +33,6 @@ public class RegistrationActivity extends AppCompatActivity {
                     .commit();
         }
 
+
     }
 }
