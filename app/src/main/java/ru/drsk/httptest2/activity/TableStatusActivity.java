@@ -1,4 +1,4 @@
-package ru.drsk.httptest2;
+package ru.drsk.httptest2.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -24,6 +24,10 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import ru.drsk.httptest2.R;
+import ru.drsk.httptest2.util.Session;
+import ru.drsk.httptest2.pojo.TextElement;
 
 
 /**

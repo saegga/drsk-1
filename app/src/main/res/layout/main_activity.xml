@@ -63,5 +63,13 @@
         android:text="@string/btn_input"
         android:textColor="@color/white"
         android:background="@color/colorPrimary"/>
+    <Button
+        android:id="@+id/registration_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/btn_regist"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"/>
 
 </LinearLayout>

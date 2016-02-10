@@ -1,4 +1,4 @@
-package ru.drsk.httptest2;
+package ru.drsk.httptest2.pojo;
 
 /**
  * Created by sergei on 04.02.2016.

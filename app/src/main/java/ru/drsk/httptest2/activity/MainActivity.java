@@ -1,4 +1,4 @@
-package ru.drsk.httptest2;
+package ru.drsk.httptest2.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,18 +21,22 @@ import org.jsoup.Jsoup;
 
 import java.io.IOException;
 
+import ru.drsk.httptest2.R;
+
 
 /**
  * Created by sergei on 28.01.2016.
  */
 public class MainActivity extends AppCompatActivity {
 
+    public static final String EXTRA_PHP_SESSION = "extra_php_session";
     private EditText inpSnils;
     private EditText inpPassword;
     private Button btnAuth;
-    public static final String EXTRA_PHP_SESSION = "extra_php_session";
+    private Button btnRegistration;
     private String snils;
     private String password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         inpSnils = (EditText) findViewById(R.id.inp_snils);
         inpPassword = (EditText) findViewById(R.id.inp_password);
         btnAuth = (Button) findViewById(R.id.auth_btn);
+        btnRegistration = (Button) findViewById(R.id.registration_btn);
+        btnRegistration.setOnClickListener(new Registration());
         btnAuth.setOnClickListener(new AuthButton());
         inpSnils.addTextChangedListener(new TextWatcher() {
             @Override
@@ -141,6 +147,15 @@ public class MainActivity extends AppCompatActivity {
                     .show();
                 btnAuth.setClickable(true);
             }
+        }
+    }
+
+    private class Registration implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent(MainActivity.this, RegistrationActivity.class);
+            startActivity(i);
+            finish();// ?надо,
         }
     }
 }
