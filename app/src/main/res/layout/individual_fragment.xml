@@ -1,28 +1,344 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="5dp">
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-    <GridLayout
-        android:numColumns="2"
+    <TextView
+        android:text="Ваш снилс*"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:text="sfd"
-            android:layout_columnWeight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="sfd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="sfd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </GridLayout>
+        android:id="@+id/reg_snils"
+        android:hint="Ваш снилс*"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="Пароль*"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/reg_password"
+        android:hint="Ваш пароль*"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/sd"
+        android:hint="Повторите пароль*"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="Серия / номер паспорта(без пробела)*"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/reg_num_passport"
+        android:hint="Серия / номер паспорта*"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="дата выдачи паспорта*"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/reg_date_pasport"
+        android:hint="дата выдачи паспорта*"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="Орган, выдавший паспорт*"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/reg_organ"
+        android:hint="Орган, выдавший паспорт*"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="фамилия*"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/reg_last_name"
+        android:hint="фамилия*"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="имя*"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/reg_first_name"
+        android:hint="имя*"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="отечество*"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/reg_father"
+        android:hint="отечество*"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <!--Сюда чекбокс-->
+    <TextView
+        android:text="день рождения*"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/reg_birthday"
+        android:hint="день рождения*"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="Email*"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/reg_email"
+        android:hint="Email*"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="Ваш почтовый индекс*"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/reg_index_po4ta"
+        android:hint="Ваш почтовый индекс*"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="Регион проживания*"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/reg_our_region"
+        android:hint="Регион проживания*"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="Район проживания"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/reg_place_life"
+        android:hint="Район проживания"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="Город/населенный пункт проживания*"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/reg_city_life"
+        android:layout_width="match_parent"
+        android:hint="Город/населенный пункт проживания*"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="Улица/микрорайон**"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/reg_street"
+        android:layout_width="match_parent"
+        android:hint="Улица/микрорайон*"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="Дом/владение*"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/reg_house"
+        android:layout_width="match_parent"
+        android:hint="Дом/владение*"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="Корпус/Строение"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/reg_korpus"
+        android:layout_width="match_parent"
+        android:hint="Корпус/Строение"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="Квартира"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/reg_apartment_number"
+        android:layout_width="match_parent"
+        android:hint="Квартира"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="Телефон"
+        android:textSize="10sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/phone_number"
+        android:layout_width="match_parent"
+        android:hint="Телефон"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        />
 </LinearLayout>
+
