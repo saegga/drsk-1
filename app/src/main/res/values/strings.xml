@@ -26,4 +26,24 @@
 В случаях, если Вы хотите узнать, какие именно Ваши персональные данные обрабатывает АО «ДРСК», либо дополнить, исправить или удалить любые неполные, неточные или устаревшие персональные данные, Вы можете в соответствии со статьей 14 Федерального закона от 27.07.2006 г. №152-ФЗ «О персональных данных» реализовать такое право, обратившись в АО «ДРСК» по адресу, указанному в разделе cайта «Контакты».
 Продолжая оставаться на сайте и заполняя регистрационную форму, Вы подтверждаете своё согласие на передачу и обработку информации в электронном виде, в том числе по открытым каналам связи посредством информационно-телекоммуникационной сети «Интернет», а также подтверждаете, что ознакомлены с положениями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных», права и обязанности в области защиты персональных данных Вам ясны.
     </string>
+    <string name="our_snils">Ваш снилс*</string>
+    <string name="reg_pass">Пароль*</string>
+    <string name="replay_pass">Повторите пароль*</string>
+    <string name="seria_number_pasport">Серия / номер паспорта(без пробела)*</string>
+    <string name="date_passport">дата выдачи паспорта*</string>
+    <string name="where_get_passport">Орган, выдавший паспорт*</string>
+    <string name="reg_last_name">фамилия*</string>
+    <string name="reg_first_name">имя*</string>
+    <string name="reg_father">отечество*</string>
+    <string name="reg_birthday">день рождения*</string>
+    <string name="reg_email">Email*</string>
+    <string name="reg_index_pochta">Ваш почтовый индекс*</string>
+    <string name="reg_place_life">Регион проживания*</string>
+    <string name="reg_life_raion">Район проживания</string>
+    <string name="reg_city_life">Город/населенный пункт проживания*</string>
+    <string name="reg_street">Улица/микрорайон**</string>
+    <string name="reg_house">Дом/владение*</string>
+    <string name="reg_korpus">Корпус/Строение</string>
+    <string name="reg_appartment">Квартира</string>
+    <string name="reg_phone_number">Телефон</string>
 </resources>
