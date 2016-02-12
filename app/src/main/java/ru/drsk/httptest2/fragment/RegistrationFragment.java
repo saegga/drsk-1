@@ -44,11 +44,12 @@ public class RegistrationFragment extends Fragment {
         Fragment fragment = null;
         switch (position){
             case 0 : fragment = new IndividualFragment(); break;
-
+            case 1 : fragment = new BusinessFragment(); break;
+            case 2 : fragment = new CorporateFragment(); break;
         }
                 manager
                 .beginTransaction()
-                .add(R.id.container_form_registration, fragment)
+                .replace(R.id.container_form_registration, fragment)
                 .commit();
 
     }

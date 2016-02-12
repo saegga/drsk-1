@@ -9,4 +9,5 @@
     <color name="corner_color">#73C8F0</color>
     <color name="bg_first_line">#DDEECC</color>
     <color name="text_btn_add_file">#0066CC</color>
+    <color name="status_load_file">#009966</color>
 </resources>

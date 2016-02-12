@@ -111,7 +111,7 @@ public class TableStatusActivity extends AppCompatActivity {
     private List<TextElement> parse(Document doc) {
         //tableData = new ArrayList<>();
         Elements el = doc.select("table.agree_color_no_bottom tr");
-        tableData = new ArrayList<>();
+        //tableData = new ArrayList<>();
         for (int i = 0; i < el.size(); i++) {
             for (int j = 0; j < el.size(); j++) {
                 if (j==1 || j == 3 || j == 8) {

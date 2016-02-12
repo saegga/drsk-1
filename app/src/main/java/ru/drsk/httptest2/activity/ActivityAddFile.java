@@ -3,18 +3,27 @@ package ru.drsk.httptest2.activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import ru.drsk.httptest2.R;
+import ru.drsk.httptest2.adapter.ListFileAdapter;
+import ru.drsk.httptest2.pojo.TextAddFile;
 import ru.drsk.httptest2.util.Session;
 
 /**
@@ -22,14 +31,17 @@ import ru.drsk.httptest2.util.Session;
  */
 public class ActivityAddFile extends AppCompatActivity {
 
-    private WebView webView;
+
     public static final String FLAG_ID_ZAYAV = "id_zayav";
     public static final String FLAG_USER_FILE = "flag_userfile";
     private static final String URL_FROM = "https://lk.drsk.ru/tp/user.php";
     private static final String URL_TO_FILE = "https://lk.drsk.ru/tp/user_files.php";
     private Button addFile;
+    private RecyclerView listAddFile;
     private Session session = Session.getInstance();
     private String flagUserFile, idZayav;
+    private List<TextAddFile> listData;
+    private ListFileAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,21 +49,36 @@ public class ActivityAddFile extends AppCompatActivity {
         if(getSupportActionBar() != null){
             getSupportActionBar().setTitle("Добавьте файлы");
         }
+        listData = new ArrayList<>();
         addFile = (Button) findViewById(R.id.add);
-
         addFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new AddFile().execute();
             }
         });
-//        webView = (WebView) findViewById(R.id.web);
-//        webView.getSettings().setJavaScriptEnabled(true);
+        listAddFile = (RecyclerView) findViewById(R.id.list_add_files);
+        listAddFile.setLayoutManager(new GridLayoutManager(this, 1));
         flagUserFile = getIntent().getStringExtra(FLAG_USER_FILE);
         idZayav = getIntent().getStringExtra(FLAG_ID_ZAYAV);
         new LoadHtmlAddFiles().execute();
     }
 
+    public List<TextAddFile> parse(Document document){
+
+        Elements el = document.select("table.agree_color_reg tr");
+        for (int i = 2; i < el.size(); i++) {
+            Elements e = el.get(i).getElementsByTag("td");
+            if(el.get(i).text().length() > 1 && (el.get(i).select("div#progress").size() == 0)){
+                if(e.size() == 2){
+                    String textLoad =  e.get(0).text();
+                    String statusLoad =  e.get(1).text();
+                    listData.add(new TextAddFile(textLoad, statusLoad));
+                }
+            }
+        }
+        return listData;
+    }
     public class LoadHtmlAddFiles extends AsyncTask<Void, Void, Document>{
 
         @Override
@@ -68,7 +95,8 @@ public class ActivityAddFile extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Document doc) {
-           // webView.loadDataWithBaseURL(null,doc.toString(), "text/html", "utf-8", null);
+            adapter = new ListFileAdapter(parse(doc), ActivityAddFile.this);
+            listAddFile.setAdapter(adapter);
         }
     }
     public class AddFile extends AsyncTask<Void, Void, Document>{
@@ -87,7 +115,6 @@ public class ActivityAddFile extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Document doc) {
-            // webView.loadDataWithBaseURL(null,doc.toString(), "text/html", "utf-8", null);
         }
     }
     public Document loadHtml() throws IOException {
@@ -106,10 +133,7 @@ public class ActivityAddFile extends AppCompatActivity {
 
         return document;
     }
-//    public File loadAddingFile(){
-//        AssetManager assetManager = getAssets();
-//        InputStream
-//    }
+
     public Document addFile() throws IOException {
         Connection c = Jsoup.connect(URL_TO_FILE);
         c.cookie(TableStatusActivity.PHP_SEISSION_ID, session.getSessionId())

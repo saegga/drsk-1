@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<!--<WebView-->
-    <!--android:id="@+id/web"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--xmlns:android="http://schemas.android.com/apk/res/android" />-->
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/list_add_files"
+        android:numColumns="auto_fit"
+        android:layout_gravity="center"
+        android:padding="1dp"
+        android:scrollbars="vertical"
+        android:clipToPadding="false"
+        android:paddingBottom="30dp"
+        android:background="@drawable/corner"
+        android:stretchMode="columnWidth"/>
     <Button
         android:id="@+id/add"
-        android:text="sfgsdgfg"
+        android:text="@string/load_documents"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:textColor="@color/white"
+        android:minHeight="40dp"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>

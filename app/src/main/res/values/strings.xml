@@ -46,4 +46,5 @@
     <string name="reg_korpus">Корпус/Строение</string>
     <string name="reg_appartment">Квартира</string>
     <string name="reg_phone_number">Телефон</string>
+    <string name="load_documents">загрузить документы</string>
 </resources>
