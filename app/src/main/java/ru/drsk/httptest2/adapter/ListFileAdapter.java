@@ -1,8 +1,8 @@
 package ru.drsk.httptest2.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.drsk.httptest2.R;
-import ru.drsk.httptest2.activity.app.OpenFileDialog;
+import ru.drsk.httptest2.activity.ActivityAddFile;
+import ru.drsk.httptest2.activity.FileChooseActivity;
 import ru.drsk.httptest2.pojo.TextAddFile;
 
 /**
@@ -43,8 +44,8 @@ public class ListFileAdapter extends RecyclerView.Adapter<ListFileAdapter.ViewHo
         holder.addBtnFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OpenFileDialog fileDialog = new OpenFileDialog(context);
-                fileDialog.show();
+                Intent i = new Intent(context, FileChooseActivity.class);
+                ((ActivityAddFile) context).startActivityForResult(i, ActivityAddFile.REQUEST_FILE_CHOOSE);
             }
         });
     }

@@ -1,5 +1,7 @@
 package ru.drsk.httptest2.activity;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,10 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -31,17 +30,21 @@ import ru.drsk.httptest2.util.Session;
  */
 public class ActivityAddFile extends AppCompatActivity {
 
-
+    public static final String FILE_ABS_PATH = "file_abs_path";
+    public static final String FILE_CHOOSE_NAME = "file_choose_name";
     public static final String FLAG_ID_ZAYAV = "id_zayav";
     public static final String FLAG_USER_FILE = "flag_userfile";
     private static final String URL_FROM = "https://lk.drsk.ru/tp/user.php";
     private static final String URL_TO_FILE = "https://lk.drsk.ru/tp/user_files.php";
+    public static final int REQUEST_FILE_CHOOSE = 0;
+
     private Button addFile;
     private RecyclerView listAddFile;
     private Session session = Session.getInstance();
     private String flagUserFile, idZayav;
     private List<TextAddFile> listData;
     private ListFileAdapter adapter;
+    private ProgressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,13 @@ public class ActivityAddFile extends AppCompatActivity {
         }
         listData = new ArrayList<>();
         addFile = (Button) findViewById(R.id.add);
+
+        addFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         addFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +71,19 @@ public class ActivityAddFile extends AppCompatActivity {
         listAddFile.setLayoutManager(new GridLayoutManager(this, 1));
         flagUserFile = getIntent().getStringExtra(FLAG_USER_FILE);
         idZayav = getIntent().getStringExtra(FLAG_ID_ZAYAV);
-        new LoadHtmlAddFiles().execute();
+
+        if(MainActivity.checkNetwork(this)){
+            new LoadHtmlAddFiles().execute();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_FILE_CHOOSE && data != null){
+            Log.d("Выбранный файл: ",
+                    "путь: " + data.getStringExtra(FILE_ABS_PATH) +
+                            " имя " + data.getStringExtra(FILE_CHOOSE_NAME));
+        }
     }
 
     public List<TextAddFile> parse(Document document){
@@ -82,6 +104,11 @@ public class ActivityAddFile extends AppCompatActivity {
     public class LoadHtmlAddFiles extends AsyncTask<Void, Void, Document>{
 
         @Override
+        protected void onPreExecute() {
+            showDialog();
+        }
+
+        @Override
         protected Document doInBackground(Void... params) {
             Document d = null;
             try {
@@ -95,8 +122,20 @@ public class ActivityAddFile extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Document doc) {
+            if(!ActivityAddFile.this.isDestroyed()){
+                dismissDialog();
+            }
             adapter = new ListFileAdapter(parse(doc), ActivityAddFile.this);
             listAddFile.setAdapter(adapter);
+        }
+    }
+    private void showDialog(){
+        dialog = new ProgressDialog(ActivityAddFile.this);
+        dialog.show();
+    }
+    private void dismissDialog(){
+        if(dialog != null && dialog.isShowing()){
+            dialog.dismiss();
         }
     }
     public class AddFile extends AsyncTask<Void, Void, Document>{

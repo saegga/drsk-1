@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    private boolean checkNetwork(Context context){
+    public static boolean checkNetwork(Context context){
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo active = connectivityManager.getActiveNetworkInfo();
