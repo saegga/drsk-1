@@ -19,7 +19,7 @@
         </activity>
         <activity android:name=".activity.TableStatusActivity"/>
         <activity android:name=".activity.RegistrationActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ActivityAddFile"/>
+        <activity android:name=".activity.ActivityStatusFiles"/>
         <activity android:name=".activity.FileChooseActivity"/>
     </application>
 

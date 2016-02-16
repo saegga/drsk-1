@@ -33,6 +33,7 @@ public class FileChooseActivity extends AppCompatActivity {
     private String startPath;
     private ActionBar toolbar;
     private View emptyView;
+    private TextView emptyText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +42,8 @@ public class FileChooseActivity extends AppCompatActivity {
         listViewFiles = (ListView) findViewById(R.id.my_list_files);
         emptyView = getLayoutInflater().inflate(R.layout.empty_directory, null);
         addContentView(emptyView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
         listViewFiles.setEmptyView(emptyView);
+        emptyText = (TextView) findViewById(R.id.test);
         toolbar = getSupportActionBar();
         setToolbarTitle("");
         FileAdapter adapter = new FileAdapter(this);
@@ -61,13 +62,13 @@ public class FileChooseActivity extends AppCompatActivity {
                 currentPath = (File) parent.getAdapter().getItem(position);
                 setToolbarTitle(currentPath.getAbsolutePath());
                 if (currentPath.isFile()) {
-                    emptyView.setVisibility(View.INVISIBLE);
+                    emptyText.setVisibility(View.GONE);
                     showConfirmDialog();
                 }
-                //emptyView.setVisibility(View.VISIBLE);
                 readDirectory(currentPath);
             }
         });
+
     }
 
     private void readDirectory(File path) {
@@ -99,8 +100,9 @@ public class FileChooseActivity extends AppCompatActivity {
                     }
                 });
         builder.show();
+        emptyText.setVisibility(View.VISIBLE);// куда поместить
     }
-
+//// TODO: 14.02.2016  сделать добавление файла под каждую кнопку и сохранение состояние при выборе нескольких + подумить на счет sd карты
     @Override
     public void onBackPressed() {
         //File parentFile = currentPath.getParentFile();
@@ -121,13 +123,14 @@ public class FileChooseActivity extends AppCompatActivity {
             setResult(RESULT_OK, i);
             finish();
         }
-        i.putExtra(ActivityAddFile.FILE_ABS_PATH, absPath);
-        i.putExtra(ActivityAddFile.FILE_CHOOSE_NAME, fileName);
+        i.putExtra(ActivityStatusFiles.FILE_ABS_PATH, absPath);
+        i.putExtra(ActivityStatusFiles.FILE_CHOOSE_NAME, fileName);
+       // i.putExtra(ActivityStatusFiles.BUTTON_ADD_ID, getIntent().getIntExtra(ActivityStatusFiles.BUTTON_ADD_ID, -1));
         setResult(RESULT_OK, i);
         finish();
 
     }
-
+//// TODO: 15.02.2016 сделать добавление текста после выбора файла
     public void setToolbarTitle(String title){
         toolbar.setTitle(title);
     }

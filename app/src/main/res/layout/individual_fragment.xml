@@ -18,6 +18,8 @@
         android:id="@+id/reg_snils"
         android:hint="@string/our_snils"
         android:gravity="center"
+        android:inputType="number"
+        android:maxLength="14"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"

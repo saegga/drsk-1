@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.drsk.httptest2.R;
-import ru.drsk.httptest2.activity.ActivityAddFile;
+import ru.drsk.httptest2.activity.ActivityStatusFiles;
 import ru.drsk.httptest2.activity.FileChooseActivity;
 import ru.drsk.httptest2.pojo.TextAddFile;
 
@@ -32,7 +32,7 @@ public class ListFileAdapter extends RecyclerView.Adapter<ListFileAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_add_file_item, parent, false);
+                .inflate(R.layout.list_status_file_item, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -45,7 +45,8 @@ public class ListFileAdapter extends RecyclerView.Adapter<ListFileAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, FileChooseActivity.class);
-                ((ActivityAddFile) context).startActivityForResult(i, ActivityAddFile.REQUEST_FILE_CHOOSE);
+               // i.putExtra(ActivityStatusFiles.BUTTON_ADD_ID, v.getId());
+                ((ActivityStatusFiles) context).startActivityForResult(i, ActivityStatusFiles.REQUEST_FILE_CHOOSE);
             }
         });
     }

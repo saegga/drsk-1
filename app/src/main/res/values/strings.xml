@@ -5,7 +5,7 @@
     <string name="btn_input">Войти</string>
     <string name="snils_hint">XXX-XXX-XXX XX</string>
     <string name="format_snils">В формате 123-456-789 01:</string>
-    <string name="snils_format"></string>
+    <string name="snils_format_error">Контрольное число СНИЛС ошибочно!</string>
     <string name="title_table">Ваши заявки</string>
     <string name="add_file">добавить файлы</string>
     <string name="btn_regist">регистрация</string>

@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -28,7 +29,7 @@ import ru.drsk.httptest2.util.Session;
 /**
  * Created by sergei on 04.02.2016.
  */
-public class ActivityAddFile extends AppCompatActivity {
+public class ActivityStatusFiles extends AppCompatActivity {
 
     public static final String FILE_ABS_PATH = "file_abs_path";
     public static final String FILE_CHOOSE_NAME = "file_choose_name";
@@ -37,7 +38,7 @@ public class ActivityAddFile extends AppCompatActivity {
     private static final String URL_FROM = "https://lk.drsk.ru/tp/user.php";
     private static final String URL_TO_FILE = "https://lk.drsk.ru/tp/user_files.php";
     public static final int REQUEST_FILE_CHOOSE = 0;
-
+    public static final String BUTTON_ADD_ID = "button_add_id";
     private Button addFile;
     private RecyclerView listAddFile;
     private Session session = Session.getInstance();
@@ -48,13 +49,12 @@ public class ActivityAddFile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_files);
+        setContentView(R.layout.activity_status_files);
         if(getSupportActionBar() != null){
             getSupportActionBar().setTitle("Добавьте файлы");
         }
         listData = new ArrayList<>();
         addFile = (Button) findViewById(R.id.add);
-
         addFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,15 +122,15 @@ public class ActivityAddFile extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Document doc) {
-            if(!ActivityAddFile.this.isDestroyed()){
+            if(!ActivityStatusFiles.this.isDestroyed()){
                 dismissDialog();
             }
-            adapter = new ListFileAdapter(parse(doc), ActivityAddFile.this);
+            adapter = new ListFileAdapter(parse(doc), ActivityStatusFiles.this);
             listAddFile.setAdapter(adapter);
         }
     }
     private void showDialog(){
-        dialog = new ProgressDialog(ActivityAddFile.this);
+        dialog = new ProgressDialog(ActivityStatusFiles.this);
         dialog.show();
     }
     private void dismissDialog(){

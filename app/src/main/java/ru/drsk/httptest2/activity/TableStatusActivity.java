@@ -155,10 +155,10 @@ public class TableStatusActivity extends AppCompatActivity {
                 holder.addFile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context.getApplicationContext(), ActivityAddFile.class);
+                        Intent intent = new Intent(context.getApplicationContext(), ActivityStatusFiles.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra(ActivityAddFile.FLAG_ID_ZAYAV, items.get(position).getIdZaiv());
-                        intent.putExtra(ActivityAddFile.FLAG_USER_FILE, items.get(position).getFlagUserFile());
+                        intent.putExtra(ActivityStatusFiles.FLAG_ID_ZAYAV, items.get(position).getIdZaiv());
+                        intent.putExtra(ActivityStatusFiles.FLAG_USER_FILE, items.get(position).getFlagUserFile());
                         context.startActivity(intent);
                     }
                 });
