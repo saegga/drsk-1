@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,15 +31,17 @@ public class IndividualFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.individual_fragment, container, false);
         inputSnils = (EditText) view.findViewById(R.id.reg_snils);
-
         inputSnils.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 if (after == 1) {
                     if (start == 3 || start == 7) {
-                        s = s + "-"; //+ s.charAt(start);
-                        inputSnils.setText(s);
-                        inputSnils.setSelection(start + 1);
+//                        s = s + "-";
+
+                       //  onTextChanged(s, start, 0, count);
+                         //+ s.charAt(start);
+                       // inputSnils.setText(s);
+                       // inputSnils.setSelection(start + 1);
                     }
                     if (start == 11) {
                         s = s + " " + s.charAt(start - 1);
@@ -52,8 +55,9 @@ public class IndividualFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (before == 0){
                     if(start == 3 || start == 8){
-                        s = s +  "" + s.charAt(start);
-                        inputSnils.setText(s);
+                        SpannableStringBuilder insert = ((SpannableStringBuilder) s).insert(start, "-");
+                      //  s = s +  "-" + s.charAt(start);
+                        inputSnils.setText(insert);
                         inputSnils.setSelection(start + 1);
                     }
                 }
@@ -61,11 +65,6 @@ public class IndividualFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-//                if(s.length() == 14){
-//                    if (!checkSnils(s.toString())) {
-//                        inputSnils.setHint("Неверный снилс");
-//                    }
-//                }
             }
         });
         inputSnils.setOnFocusChangeListener(new View.OnFocusChangeListener() {

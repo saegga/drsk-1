@@ -41,11 +41,13 @@ public class ListFileAdapter extends RecyclerView.Adapter<ListFileAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.textView.setText(list.get(position).getLoadFile());
         holder.notifyFile.setText(list.get(position).getStatusLoadFile());
+        holder.fileName.setText(list.get(position).getFileName());
+        holder.addBtnFile.setId(position);
         holder.addBtnFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, FileChooseActivity.class);
-               // i.putExtra(ActivityStatusFiles.BUTTON_ADD_ID, v.getId());
+                i.putExtra(ActivityStatusFiles.BUTTON_ADD_ID, v.getId());
                 ((ActivityStatusFiles) context).startActivityForResult(i, ActivityStatusFiles.REQUEST_FILE_CHOOSE);
             }
         });
@@ -55,6 +57,7 @@ public class ListFileAdapter extends RecyclerView.Adapter<ListFileAdapter.ViewHo
     public int getItemCount() {
         return list.size();
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 

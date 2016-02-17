@@ -80,22 +80,27 @@ public class ActivityStatusFiles extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_FILE_CHOOSE && data != null){
-            Log.d("Выбранный файл: ",
+            Log.d("Выбранный файл: ",//// TODO: 16.02.2016 сделать стурктуру где хранить пути к файлам 
                     "путь: " + data.getStringExtra(FILE_ABS_PATH) +
-                            " имя " + data.getStringExtra(FILE_CHOOSE_NAME));
+                            " имя " + data.getStringExtra(FILE_CHOOSE_NAME) +
+                                "кнопка " + data.getIntExtra(BUTTON_ADD_ID, -1));
+            listData.get(data.getIntExtra(BUTTON_ADD_ID, -1)).setFileName(data.getStringExtra(FILE_CHOOSE_NAME));
+            adapter.notifyDataSetChanged();
         }
+
     }
 
     public List<TextAddFile> parse(Document document){
 
         Elements el = document.select("table.agree_color_reg tr");
+        int k = 0; // позиция для определени нажатия кнопки
         for (int i = 2; i < el.size(); i++) {
             Elements e = el.get(i).getElementsByTag("td");
             if(el.get(i).text().length() > 1 && (el.get(i).select("div#progress").size() == 0)){
                 if(e.size() == 2){
                     String textLoad =  e.get(0).text();
                     String statusLoad =  e.get(1).text();
-                    listData.add(new TextAddFile(textLoad, statusLoad));
+                    listData.add(new TextAddFile(textLoad, statusLoad, k++));
                 }
             }
         }

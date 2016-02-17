@@ -125,7 +125,7 @@ public class FileChooseActivity extends AppCompatActivity {
         }
         i.putExtra(ActivityStatusFiles.FILE_ABS_PATH, absPath);
         i.putExtra(ActivityStatusFiles.FILE_CHOOSE_NAME, fileName);
-       // i.putExtra(ActivityStatusFiles.BUTTON_ADD_ID, getIntent().getIntExtra(ActivityStatusFiles.BUTTON_ADD_ID, -1));
+        i.putExtra(ActivityStatusFiles.BUTTON_ADD_ID, getIntent().getIntExtra(ActivityStatusFiles.BUTTON_ADD_ID, -1));
         setResult(RESULT_OK, i);
         finish();
 

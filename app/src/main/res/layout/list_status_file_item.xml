@@ -26,7 +26,6 @@
         <TextView
             android:id="@+id/file_name"
             android:textSize="10sp"
-            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView

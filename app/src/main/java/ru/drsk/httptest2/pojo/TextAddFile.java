@@ -4,12 +4,20 @@ package ru.drsk.httptest2.pojo;
  * Created by sergei on 11.02.2016.
  */
 public class TextAddFile {
-    String loadFile;
-    String statusLoadFile;
+    private String loadFile;
+    private String statusLoadFile;
+    private String fileName = "";
+    private int position;
 
     public TextAddFile(String loadFile, String statusLoadFile) {
         this.loadFile = loadFile;
         this.statusLoadFile = statusLoadFile;
+    }
+
+    public TextAddFile(String loadFile, String statusLoadFile, int position) {
+        this.loadFile = loadFile;
+        this.statusLoadFile = statusLoadFile;
+        this.position = position;
     }
 
     public String getLoadFile() {
@@ -26,5 +34,21 @@ public class TextAddFile {
 
     public void setStatusLoadFile(String statusLoadFile) {
         this.statusLoadFile = statusLoadFile;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 }
