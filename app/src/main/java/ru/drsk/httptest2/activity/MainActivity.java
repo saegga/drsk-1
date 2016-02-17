@@ -9,8 +9,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextWatcher;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +23,7 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import ru.drsk.httptest2.R;
 
@@ -51,26 +55,40 @@ public class MainActivity extends AppCompatActivity {
         btnRegistration.setOnClickListener(new Registration());
         btnAuth.setOnClickListener(new AuthButton());
         inpSnils.addTextChangedListener(new TextWatcher() {
+            char[] ch = new char[14];
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (after == 1) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //// TODO: 16.02.2016 сделать по нормальному алгоритм
+                if (before == 0) {
                     if (start == 3 || start == 7) {
-                        s = s + "-" + s.charAt(start - 1);
-                        inpSnils.setText(s);
+                        for (int i = 0; i < s.length(); i++) {
+                            if (i == 3 || i == 7) {
+                                ch[i] = '-';
+                                ch[i + 1] = s.charAt(i);
+                                continue;
+                            }
+                            ch[i] = s.charAt(i);
+                        }
+                        inpSnils.setText(String.valueOf(ch).trim());
                         inpSnils.setSelection(start + 2);
-                    }
-                    if (start == 11) {
-                        s = s + " " + s.charAt(start - 1);
+                    } else if (start == 11) {
+                        char c = s.charAt(start);
+                        s = s.subSequence(0, 11);
+                        s = s + " " + c;
                         inpSnils.setText(s);
                         inpSnils.setSelection(start + 2);
                     }
                 }
+                ch = new char[14];
 
             }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-            }
             @Override
             public void afterTextChanged(Editable s) {
 
@@ -78,35 +96,36 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private class AuthButton implements View.OnClickListener{
+    private class AuthButton implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            if(checkNetwork(getApplicationContext())){
+            if (checkNetwork(getApplicationContext())) {
                 snils = inpSnils.getText().toString();
                 password = inpPassword.getText().toString();
                 new AsyncCheckLogin().execute();
                 v.setClickable(false);
-            }else{
+            } else {
                 Toast.makeText(getApplicationContext(), "Нет соединения с интернетом", Toast.LENGTH_SHORT)
                         .show();
             }
         }
     }
-    public static boolean checkNetwork(Context context){
+
+    public static boolean checkNetwork(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo active = connectivityManager.getActiveNetworkInfo();
-        if(active != null){
-            if(active.getType() == ConnectivityManager.TYPE_WIFI){
+        if (active != null) {
+            if (active.getType() == ConnectivityManager.TYPE_WIFI) {
                 return true;
-            }
-            else if(active.getType() == ConnectivityManager.TYPE_MOBILE){
+            } else if (active.getType() == ConnectivityManager.TYPE_MOBILE) {
                 return true;
             }
         }
         return false;
     }
+
     private String checkLogin() throws IOException {
         Connection.Response res = Jsoup.connect(TableStatusActivity.URl)
                 .data("user_login", snils, "user_password", password)
@@ -115,12 +134,13 @@ public class MainActivity extends AppCompatActivity {
                 .timeout(0)
                 .method(Connection.Method.POST)
                 .execute();
-        if(!TableStatusActivity.URl_USER.equals(res.url().toString())){
+        if (!TableStatusActivity.URl_USER.equals(res.url().toString())) {
             return null;
         }
         return res.cookie(TableStatusActivity.PHP_SEISSION_ID);
     }
-    public class AsyncCheckLogin extends AsyncTask<Void, Void, String>{
+
+    public class AsyncCheckLogin extends AsyncTask<Void, Void, String> {
 
         @Override
         protected String doInBackground(Void... params) {
@@ -135,16 +155,16 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String session) {
-            if(session != null){
+            if (session != null) {
                 //btnAuth.setEnabled(false);
                 Intent intent = new Intent(MainActivity.this, TableStatusActivity.class);
                 intent.putExtra(EXTRA_PHP_SESSION, session);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
-            }else {
+            } else {
                 Toast.makeText(getApplicationContext(), "Неверный логин или пароль", Toast.LENGTH_SHORT)
-                    .show();
+                        .show();
                 btnAuth.setClickable(true);
             }
         }
@@ -155,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent i = new Intent(MainActivity.this, RegistrationActivity.class);
             startActivity(i);
-           // finish();// ?надо,
+            // finish();// ?надо,
         }
     }
 }

@@ -32,35 +32,35 @@ public class IndividualFragment extends Fragment {
         View view = inflater.inflate(R.layout.individual_fragment, container, false);
         inputSnils = (EditText) view.findViewById(R.id.reg_snils);
         inputSnils.addTextChangedListener(new TextWatcher() {
+            char[] ch = new char[14];
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (after == 1) {
-                    if (start == 3 || start == 7) {
-//                        s = s + "-";
-
-                       //  onTextChanged(s, start, 0, count);
-                         //+ s.charAt(start);
-                       // inputSnils.setText(s);
-                       // inputSnils.setSelection(start + 1);
-                    }
-                    if (start == 11) {
-                        s = s + " " + s.charAt(start - 1);
-                        inputSnils.setText(s);
-                        inputSnils.setSelection(start + 2);
-                    }
-                }
+//
             }
 //// TODO: 15.02.2016 сделать форматный ввод изменить остальные поля числа, дата
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (before == 0){
-                    if(start == 3 || start == 8){
-                        SpannableStringBuilder insert = ((SpannableStringBuilder) s).insert(start, "-");
-                      //  s = s +  "-" + s.charAt(start);
-                        inputSnils.setText(insert);
-                        inputSnils.setSelection(start + 1);
+                if (before == 0) {
+                    if (start == 3 || start == 7) {
+                        for (int i = 0; i < s.length(); i++) {
+                            if (i == 3 || i == 7) {
+                                ch[i] = '-';
+                                ch[i + 1] = s.charAt(i);
+                                continue;
+                            }
+                            ch[i] = s.charAt(i);
+                        }
+                        inputSnils.setText(String.valueOf(ch).trim());
+                        inputSnils.setSelection(start + 2);
+                    } else if (start == 11) {
+                        char c = s.charAt(start);
+                        s = s.subSequence(0, 11);
+                        s = s + " " + c;
+                        inputSnils.setText(s);
+                        inputSnils.setSelection(start + 2);
                     }
                 }
+                ch = new char[14];
             }
 
             @Override

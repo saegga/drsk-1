@@ -102,7 +102,6 @@ public class FileChooseActivity extends AppCompatActivity {
         builder.show();
         emptyText.setVisibility(View.VISIBLE);// куда поместить
     }
-//// TODO: 14.02.2016  сделать добавление файла под каждую кнопку и сохранение состояние при выборе нескольких + подумить на счет sd карты
     @Override
     public void onBackPressed() {
         //File parentFile = currentPath.getParentFile();
@@ -130,7 +129,6 @@ public class FileChooseActivity extends AppCompatActivity {
         finish();
 
     }
-//// TODO: 15.02.2016 сделать добавление текста после выбора файла
     public void setToolbarTitle(String title){
         toolbar.setTitle(title);
     }
