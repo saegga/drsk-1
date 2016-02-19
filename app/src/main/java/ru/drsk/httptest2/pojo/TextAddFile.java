@@ -7,17 +7,10 @@ public class TextAddFile {
     private String loadFile;
     private String statusLoadFile;
     private String fileName = "";
-    private int position;
 
     public TextAddFile(String loadFile, String statusLoadFile) {
         this.loadFile = loadFile;
         this.statusLoadFile = statusLoadFile;
-    }
-
-    public TextAddFile(String loadFile, String statusLoadFile, int position) {
-        this.loadFile = loadFile;
-        this.statusLoadFile = statusLoadFile;
-        this.position = position;
     }
 
     public String getLoadFile() {
@@ -44,11 +37,4 @@ public class TextAddFile {
         this.fileName = fileName;
     }
 
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
 }

@@ -93,14 +93,13 @@ public class ActivityStatusFiles extends AppCompatActivity {
     public List<TextAddFile> parse(Document document){
 
         Elements el = document.select("table.agree_color_reg tr");
-        int k = 0; // позиция для определени нажатия кнопки не нужна!!
         for (int i = 2; i < el.size(); i++) {
             Elements e = el.get(i).getElementsByTag("td");
             if(el.get(i).text().length() > 1 && (el.get(i).select("div#progress").size() == 0)){
                 if(e.size() == 2){
                     String textLoad =  e.get(0).text();
                     String statusLoad =  e.get(1).text();
-                    listData.add(new TextAddFile(textLoad, statusLoad, k++));
+                    listData.add(new TextAddFile(textLoad, statusLoad));
                 }
             }
         }
@@ -193,7 +192,8 @@ public class ActivityStatusFiles extends AppCompatActivity {
                 .method(Connection.Method.POST)
                 .header("Content-Disposition", "form-data")
                 .header("PHP_SESSION_UPLOAD_PROGRESS", "test")
-                .header("Content-Type","application/octet-stream")
+                .header("Content-Type","application/octet-stream;"
+                        + "boundary=----WebKitFormBoundaryTLw5SZnLKDsbbgUO")
                 .header("name","f5")
                 .header("filename", "")
                 .timeout(0);

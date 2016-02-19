@@ -174,6 +174,4 @@ public class FileChooseActivity extends AppCompatActivity {
             return convertView;
         }
     }
-
-
 }

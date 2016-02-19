@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         btnRegistration.setOnClickListener(new Registration());
         btnAuth.setOnClickListener(new AuthButton());
         inpSnils.addTextChangedListener(new TextWatcher() {
-            char[] ch = new char[14];
+
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -64,29 +64,22 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //// TODO: 16.02.2016 сделать по нормальному алгоритм
                 if (before == 0) {
                     if (start == 3 || start == 7) {
-                        for (int i = 0; i < s.length(); i++) {
-                            if (i == 3 || i == 7) {
-                                ch[i] = '-';
-                                ch[i + 1] = s.charAt(i);
-                                continue;
-                            }
-                            ch[i] = s.charAt(i);
-                        }
-                        inpSnils.setText(String.valueOf(ch).trim());
+                        char c = s.charAt(start);
+                        s = s.subSequence(0, start);
+                        s = s + "-" + c;
+                        inpSnils.setText(s);
                         inpSnils.setSelection(start + 2);
+
                     } else if (start == 11) {
                         char c = s.charAt(start);
-                        s = s.subSequence(0, 11);
+                        s = s.subSequence(0, start);
                         s = s + " " + c;
                         inpSnils.setText(s);
                         inpSnils.setSelection(start + 2);
                     }
                 }
-                ch = new char[14];
-
             }
 
             @Override
@@ -175,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent i = new Intent(MainActivity.this, RegistrationActivity.class);
             startActivity(i);
-            // finish();// ?надо,
         }
     }
 }
