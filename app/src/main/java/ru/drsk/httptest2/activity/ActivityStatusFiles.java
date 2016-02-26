@@ -24,6 +24,7 @@ import java.util.List;
 import ru.drsk.httptest2.R;
 import ru.drsk.httptest2.adapter.ListFileAdapter;
 import ru.drsk.httptest2.pojo.TextAddFile;
+import ru.drsk.httptest2.util.ConstantRequest;
 import ru.drsk.httptest2.util.Session;
 
 /**
@@ -35,8 +36,7 @@ public class ActivityStatusFiles extends AppCompatActivity {
     public static final String FILE_CHOOSE_NAME = "file_choose_name";
     public static final String FLAG_ID_ZAYAV = "id_zayav";
     public static final String FLAG_USER_FILE = "flag_userfile";
-    private static final String URL_FROM = "https://lk.drsk.ru/tp/user.php";
-    private static final String URL_TO_FILE = "https://lk.drsk.ru/tp/user_files.php";
+
     public static final int REQUEST_FILE_CHOOSE = 0;
     public static final String BUTTON_ADD_ID = "button_add_id";
     private Button addFile;
@@ -162,15 +162,15 @@ public class ActivityStatusFiles extends AppCompatActivity {
     }
     public Document loadHtml() throws IOException {
         Document document;
-        Connection c = Jsoup.connect(URL_FROM);
+        Connection c = Jsoup.connect(ConstantRequest.URL_FROM);
         c.data(FLAG_USER_FILE, flagUserFile)
                 .data(FLAG_ID_ZAYAV, idZayav)
-                .cookie(TableStatusActivity.PHP_SEISSION_ID, session.getSessionId())
+                .cookie(ConstantRequest.PHP_SEISSION_ID, session.getSessionId())
                 .method(Connection.Method.POST)
                 .timeout(0)
                 .execute();
         document = c
-                .url(URL_TO_FILE)
+                .url(ConstantRequest.URL_TO_FILE)
                 .timeout(0)
                 .get();
 
@@ -187,8 +187,8 @@ public class ActivityStatusFiles extends AppCompatActivity {
     */
 
     public Document addFile() throws IOException {
-        Connection c = Jsoup.connect(URL_TO_FILE);
-        c.cookie(TableStatusActivity.PHP_SEISSION_ID, session.getSessionId())
+        Connection c = Jsoup.connect(ConstantRequest.URL_TO_FILE);
+        c.cookie(ConstantRequest.PHP_SEISSION_ID, session.getSessionId())
                 .method(Connection.Method.POST)
                 .header("Content-Disposition", "form-data")
                 .header("PHP_SESSION_UPLOAD_PROGRESS", "test")

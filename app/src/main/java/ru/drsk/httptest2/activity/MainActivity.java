@@ -8,12 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-
-import android.text.InputFilter;
-import android.text.Spanned;
 import android.text.TextWatcher;
-
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,9 +18,9 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 import ru.drsk.httptest2.R;
+import ru.drsk.httptest2.util.ConstantRequest;
 
 
 /**
@@ -120,14 +115,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String checkLogin() throws IOException {
-        Connection.Response res = Jsoup.connect(TableStatusActivity.URl)
+        Connection.Response res = Jsoup.connect(ConstantRequest.URl)
                 .data("user_login", snils, "user_password", password)
                 .data("stat", "1")
                 .data("flag", "1")
                 .timeout(0)
                 .method(Connection.Method.POST)
                 .execute();
-        if (!TableStatusActivity.URl_USER.equals(res.url().toString())) {
+        if (!ConstantRequest.URl_USER.equals(res.url().toString())) {
             return null;
         }
         return res.cookie(TableStatusActivity.PHP_SEISSION_ID);

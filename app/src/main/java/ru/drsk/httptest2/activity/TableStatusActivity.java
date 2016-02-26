@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.drsk.httptest2.R;
+import ru.drsk.httptest2.util.ConstantRequest;
 import ru.drsk.httptest2.util.Session;
 import ru.drsk.httptest2.pojo.TextElement;
 
@@ -35,10 +36,6 @@ import ru.drsk.httptest2.pojo.TextElement;
  */
 public class TableStatusActivity extends AppCompatActivity {
 
-
-    public static final String URl = "https://lk.drsk.ru/tp/userlog.php";
-    public static final String URl_USER = "https://lk.drsk.ru/tp/user.php";
-    public static final String PHP_SEISSION_ID = "PHPSESSID";
     private List<TextElement> tableData;
     private RecyclerView table;
     private ProgressDialog dialog;
@@ -101,8 +98,8 @@ public class TableStatusActivity extends AppCompatActivity {
 
     public Document getHtml(String sessId) throws IOException {
         Document doc;
-        doc = Jsoup.connect("https://lk.drsk.ru/tp/user.php")
-                .cookie(PHP_SEISSION_ID, sessId)
+        doc = Jsoup.connect(ConstantRequest.URl_USER)
+                .cookie(ConstantRequest.PHP_SEISSION_ID, sessId)
                 .timeout(0)
                 .get();
         return doc;

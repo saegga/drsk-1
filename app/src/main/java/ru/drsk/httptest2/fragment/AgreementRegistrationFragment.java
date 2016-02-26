@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+
 import ru.drsk.httptest2.R;
 
 /**
