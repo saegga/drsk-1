@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         if (!ConstantRequest.URl_USER.equals(res.url().toString())) {
             return null;
         }
-        return res.cookie(TableStatusActivity.PHP_SEISSION_ID);
+        return res.cookie(ConstantRequest.PHP_SEISSION_ID);
     }
 
     public class AsyncCheckLogin extends AsyncTask<Void, Void, String> {
