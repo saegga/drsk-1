@@ -49,6 +49,7 @@
     <string name="load_documents">загрузить документы</string>
     <string name="folder_empty">Папка пуста</string>
     <string name="our_inn">ваш ИНН*</string>
+    <string name="inn">ИНН</string>
     <string name="our_ogrn">ОГРН из ЕГРЮЛ*</string>
     <string name="name_organiz">Название организации*</string>
     <string name="po4t_index_org">Почтовый индекс организации</string>
@@ -62,4 +63,5 @@
     <string name="reg_phone_number_help">Укажите при желании номер телефона  Указанный телефон может быть использован специалистами АО ДРСК для связи с Вами, что позволит значительно ускорить обработку и исполнение заявок</string>
     <string name="raion_org">Укажите район города или региона, если присутствует деление на районы</string>
     <string name="raion">Район организации</string>
+    <string name="ogrn_corp">ОГРН из ЕГРЮЛ</string>
 </resources>

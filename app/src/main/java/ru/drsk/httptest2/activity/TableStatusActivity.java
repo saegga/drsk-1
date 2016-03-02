@@ -26,9 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.drsk.httptest2.R;
+import ru.drsk.httptest2.pojo.TextElement;
 import ru.drsk.httptest2.util.ConstantRequest;
 import ru.drsk.httptest2.util.Session;
-import ru.drsk.httptest2.pojo.TextElement;
 
 
 /**
@@ -51,7 +51,7 @@ public class TableStatusActivity extends AppCompatActivity {
         if(getSupportActionBar() != null){
             getSupportActionBar().setTitle("Личный кабинет");
         }
-        session.setSessionId(getIntent().getStringExtra(MainActivity.EXTRA_PHP_SESSION));
+        session.setSessionId(getIntent().getStringExtra(ConstantRequest.EXTRA_PHP_SESSION));
         new AsyncTaskNetworkRequest().execute(session.getSessionId());
 
     }

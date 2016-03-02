@@ -1,75 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/drsk_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo_color_ao"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"/>
-    <TextView
-        android:text="@string/snils"
-        android:textSize="18sp"
-        android:layout_marginTop="25dp"
-        android:gravity="center"
-        android:textColor="@color/black"
+    <FrameLayout
+        android:id="@+id/container_fragment_auth"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/inp_snils"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:layout_margin="10dp"
-        android:padding="5dp"
-        android:hint="@string/snils_hint"
-        android:maxLength="14"
-        android:background="@drawable/corner_edit_main"/>
-    <TextView
-        android:text="@string/format_snils"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/format_snils"
-        android:textSize="10sp"
-        />
-    <TextView
-        android:text="@string/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/black"/>
-    <EditText
-        android:id="@+id/inp_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberPassword"
-        android:layout_margin="10dp"
-        android:padding="5dp"
-        android:hint="******"
-        android:background="@drawable/corner_edit_main"/>
-
-    <Button
-        android:id="@+id/auth_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/btn_input"
-        android:textColor="@color/white"
-        android:background="@color/colorPrimary"/>
-    <Button
-        android:id="@+id/registration_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/btn_regist"
-        android:textColor="@color/white"
-        android:background="@color/colorPrimary"/>
-
-</LinearLayout>
+        android:layout_height="wrap_content"/>
+</ScrollView>

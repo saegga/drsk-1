@@ -11,4 +11,5 @@ public interface ConstantRequest {
     String URL_TO_FILE = "https://lk.drsk.ru/tp/user_files.php";
     String URL_REGISTRATION = "https://lk.drsk.ru/tp/userreg.php";
     String PHP_SEISSION_ID = "PHPSESSID";
+    String EXTRA_PHP_SESSION = "extra_php_session";
 }
