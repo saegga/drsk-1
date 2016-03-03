@@ -5,7 +5,7 @@ package ru.drsk.httptest2.util;
  */
 public interface ConstantRequest {
 
-    String URl = "https://lk.drsk.ru/tp/userlog.php";
+    String URl_USER_LOG = "https://lk.drsk.ru/tp/userlog.php";
     String URl_USER = "https://lk.drsk.ru/tp/user.php";
     String URL_FROM = "https://lk.drsk.ru/tp/user.php";
     String URL_TO_FILE = "https://lk.drsk.ru/tp/user_files.php";

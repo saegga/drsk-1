@@ -21,7 +21,6 @@ import java.io.IOException;
 
 import ru.drsk.httptest2.R;
 import ru.drsk.httptest2.activity.MainActivity;
-import ru.drsk.httptest2.activity.RegistrationActivity;
 import ru.drsk.httptest2.activity.TableStatusActivity;
 import ru.drsk.httptest2.util.ConstantRequest;
 
@@ -97,7 +96,7 @@ public class AuthIndividual extends Fragment {
         }
     }
     private String checkLogin() throws IOException {
-        Connection.Response res = Jsoup.connect(ConstantRequest.URl)
+        Connection.Response res = Jsoup.connect(ConstantRequest.URl_USER_LOG)
                 .data("user_login", snils, "user_password", password)
                 .data("stat", "1")
                 .data("flag", "1")
@@ -139,11 +138,5 @@ public class AuthIndividual extends Fragment {
             }
         }
     }
-    private class Registration implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            Intent i = new Intent(getActivity(), RegistrationActivity.class);
-            startActivity(i);
-        }
-    }
+
 }
