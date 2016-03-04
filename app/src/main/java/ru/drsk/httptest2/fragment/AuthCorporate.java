@@ -105,7 +105,7 @@ public class AuthCorporate extends Fragment {
                 startActivity(intent);
                 getActivity().finish();
             } else {
-                Toast.makeText(getActivity(), "Неверный логин или пароль", Toast.LENGTH_SHORT)
+                Toast.makeText(getActivity(), "Неверные данные", Toast.LENGTH_SHORT)
                         .show();
                 authCorp.setClickable(true);
             }

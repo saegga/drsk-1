@@ -20,7 +20,7 @@ import ru.drsk.httptest2.activity.RegistrationActivity;
 /**
  * Created by sergei on 01.03.2016.
  */
-public class AuthenticatorFragment extends Fragment {
+public class AuthContainerFragment extends Fragment {
 
     private Spinner spinner;
     private Button btnRegistration;

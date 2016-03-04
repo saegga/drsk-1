@@ -22,7 +22,7 @@ import ru.drsk.httptest2.R;
 /**
  * Created by sergei on 09.02.2016.
  */
-public class IndividualFragment extends Fragment {
+public class RegIndividualFragment extends Fragment {
 
     private EditText inputSnils;
 

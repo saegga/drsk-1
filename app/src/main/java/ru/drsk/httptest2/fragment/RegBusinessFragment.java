@@ -12,7 +12,7 @@ import ru.drsk.httptest2.R;
 /**
  * Created by sergei on 10.02.2016.
  */
-public class BusinessFragment extends Fragment {
+public class RegBusinessFragment extends Fragment {
 
     @Nullable
     @Override

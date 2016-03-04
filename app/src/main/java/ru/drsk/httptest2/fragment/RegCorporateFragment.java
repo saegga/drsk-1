@@ -1,5 +1,6 @@
 package ru.drsk.httptest2.fragment;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -19,13 +21,14 @@ import org.jsoup.nodes.Document;
 import java.io.IOException;
 
 import ru.drsk.httptest2.R;
+import ru.drsk.httptest2.activity.MainActivity;
 import ru.drsk.httptest2.util.ConstantRequest;
 import ru.drsk.httptest2.util.Session;
 
 /**
  * Created by sergei on 10.02.2016.
  */
-public class CorporateFragment extends Fragment {
+public class RegCorporateFragment extends Fragment {
 
     private EditText regInn, regOgrn, regPass,
             regPassRepl, regNameOrg, regEmail, regPost,
@@ -34,6 +37,7 @@ public class CorporateFragment extends Fragment {
             regPhoneOrg, regArea;
 
     private Button btnReg;
+    private String saveInn, saveOgrn; // для передачи в окно авторизации после регистр
 
     private static boolean successInput = false;
 
@@ -87,6 +91,9 @@ public class CorporateFragment extends Fragment {
                 checkStatusEdit();
                 checkPassword();
                 if (successInput) {
+//                    saveInn = regInn.getText().toString();
+//                    saveOgrn = regOgrn.getText().toString();
+                    new RequestRegistration().execute();
                     //делаем запрос
                     Log.d("Success: ", "Request success");
                 } else {
@@ -132,12 +139,12 @@ public class CorporateFragment extends Fragment {
         });
         return view;
     }
-
-    public Document requestRegistration() {
-        Document document = null;
+    // todo протестить
+    public boolean requestRegistration() throws IOException {
         Connection connection = Jsoup.connect(ConstantRequest.URL_REGISTRATION);
-
-          connection.cookie(ConstantRequest.PHP_SEISSION_ID, Session.getInstance().getSessionId())
+        boolean successReg;
+        Connection.Response res =
+                connection.cookie(ConstantRequest.PHP_SEISSION_ID, Session.getInstance().getSessionId())
                   .method(Connection.Method.POST)
                   .timeout(0)
                   .data(USER_LOGIN_UR, regInn.getText().toString())
@@ -156,20 +163,34 @@ public class CorporateFragment extends Fragment {
                   .data(PAVILION_UR, regKorpusOrg.getText().toString())
                   .data(APARTMENT_UR, regAppartmentOrg.getText().toString())
                   .data(TEL_UR, regPhoneOrg.getText().toString())
-                  .data(FLAG, FLAG_DATA);
-        try {
-            document = connection.get();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return document;// возвращать connection?
+                  .data(FLAG, FLAG_DATA).execute();
+        successReg = !ConstantRequest.URL_REGISTRATION.equals(res.url().toString());
+        return successReg;
     }
 
-    public class RequestRegistration extends AsyncTask<Void, Void, Void>{
+    public class RequestRegistration extends AsyncTask<Void, Void, Boolean>{
 
         @Override
-        protected Void doInBackground(Void... params) {
-            return null;
+        protected Boolean doInBackground(Void... params) {
+            boolean result = false;
+            try {
+                result = requestRegistration();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            if(!aBoolean){
+                Toast.makeText(getActivity(), "Ошибка регистрации", Toast.LENGTH_LONG).show();
+            }else{
+                Intent i = new Intent(getActivity(), MainActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                getActivity().finish();
+            }
         }
     }
 
@@ -256,4 +277,4 @@ public class CorporateFragment extends Fragment {
         return false;
     }
 }
-
+//// TODO: 02.03.2016 сделать регистрацию юриков
