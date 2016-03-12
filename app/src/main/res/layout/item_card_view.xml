@@ -2,38 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView
-        android:clickable="true"
         android:id="@+id/card_view"
-        card_view:cardUseCompatPadding="true"
-        card_view:cardElevation="4dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        card_view:cardElevation="4dp"
+        card_view:cardUseCompatPadding="true">
+
         <RelativeLayout
-            android:layout_margin="5dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="5dp">
 
             <LinearLayout
                 android:id="@+id/lin1"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp">
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
                 <TextView
-                    android:text="Наименование объекта "
+                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView" />
+                    android:text="Наименование объекта " />
+
                 <TextView
                     android:id="@+id/name_obj"
-                    android:text="Тестовый объект"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="Тестовый объект" />
             </LinearLayout>
 
             <LinearLayout
@@ -42,140 +45,176 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="5dp"
-                android:layout_below="@+id/lin1">
+                android:layout_below="@+id/lin1"
+                android:layout_marginBottom="5dp">
+
                 <TextView
-                    android:text="Дата подачи заявки: "
+                    android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView2" />
+                    android:text="Дата подачи заявки: " />
+
                 <TextView
                     android:id="@+id/date"
-                    android:text="21.05.12"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="21.05.12" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/lin3"
-                android:layout_marginBottom="5dp"
-                android:orientation="horizontal"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/lin2"
-                android:layout_height="wrap_content">
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
                 <TextView
-                    android:text="Адрес присоединения \nобъекта : "
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="Адрес присоединения \nобъекта : " />
+
                 <TextView
                     android:id="@+id/address"
-                    android:layout_gravity="center"
-                    android:text="Новое присоединение"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Новое присоединение" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btn_lin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lin3">
+
+                <Button
+                    android:id="@+id/add_files_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:padding="5dp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/button_add_file"
+                    android:text="Добавить файлы"
+                    android:textSize="8sp" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/lin4"
-                android:orientation="horizontal"
-                android:layout_below="@id/lin3"
-                android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_lin"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:text="Статус заявки "
+
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="Статус заявки " />
+
                 <TextView
                     android:id="@+id/status"
-                    android:text="На регистрации"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="На регистрации " />
+
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/toggle_linear"
-                android:layout_below="@+id/lin4"
-                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lin4"
+                android:orientation="vertical">
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                <TextView
-                    android:text="Тип технологического \nприсоединения"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:id="@+id/type"
-                    android:layout_gravity="center"
-                    android:text="Увеличение присоединенной мощности"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-                <LinearLayout
-                    android:layout_marginBottom="5dp"
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="horizontal">
+
                     <TextView
-                        android:text="Ваш комментарий \nк заявке:"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="Тип технологического \nприсоединения" />
+
+                    <TextView
+                        android:id="@+id/type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Увеличение присоединенной мощности" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ваш комментарий \nк заявке:" />
+
                     <TextView
                         android:id="@+id/comment"
-                        android:text="Комментарий"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:text="Комментарий" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:layout_marginBottom="5dp"
-                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
                     <TextView
-                        android:text="Запрашиваемая \nмощность кВт:"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="Запрашиваемая \nмощность кВт:" />
+
                     <TextView
                         android:id="@+id/power"
-                        android:text="12 кВт"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:text="12 кВт" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
                     <TextView
-                        android:text="Напряжение, кВ: "
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="Напряжение, кВ: " />
+
                     <TextView
                         android:id="@+id/voltage"
-                        android:text="12 кВт"
-                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="12 кВт" />
                 </LinearLayout>
             </LinearLayout>
 
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
+
     <ImageButton
         android:id="@+id/expand_btn"
-        android:src="@mipmap/ic_expand_more_white_24dp"
-        android:layout_marginTop="-28dp"
-        android:background="@drawable/img_card_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:layout_marginTop="-28dp"
         android:adjustViewBounds="false"
+        android:background="@drawable/img_card_button"
         android:elevation="5dp"
+        android:src="@mipmap/ic_expand_more_white_24dp"
         tools:ignore="UnusedAttribute" />
 
 </LinearLayout>

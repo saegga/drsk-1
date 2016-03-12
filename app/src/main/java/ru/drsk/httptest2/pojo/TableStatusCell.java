@@ -118,6 +118,7 @@ public class TableStatusCell {
     }
 
     public String getAddress() {
+        address = address.replace("<br>", "");
         return address;
     }
 
@@ -158,6 +159,7 @@ public class TableStatusCell {
     }
 
     public String getStatus() {
+        status = status.replace("<p>", "");
         return status;
     }
 
