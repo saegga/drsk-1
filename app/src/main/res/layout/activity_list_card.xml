@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/grid"
+    android:numColumns="auto_fit"
+    android:gravity="center"
+    android:padding="1dp"
+    android:scrollbars="vertical"
+    android:background="@drawable/corner"
+    android:stretchMode="columnWidth"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+</android.support.v7.widget.RecyclerView>
+

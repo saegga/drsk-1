@@ -44,7 +44,7 @@ public class TableStatusActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_jsoup);
+        setContentView(R.layout.activity_list_card);
         tableData = new ArrayList<>();
         table = (RecyclerView) findViewById(R.id.grid);
         table.setLayoutManager(new GridLayoutManager(this, 3));
