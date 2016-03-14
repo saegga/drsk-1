@@ -73,40 +73,18 @@ public class TableStatusCell {
         return hasButton;
     }
 
-    public void setHasButton(boolean hasButton) {
-        this.hasButton = hasButton;
-    }
 
     public String getFlagUserFile() {
         return flagUserFile;
-    }
-
-    public void setFlagUserFile(String flagUserFile) {
-        this.flagUserFile = flagUserFile;
     }
 
     public String getIdZaiv() {
         return idZaiv;
     }
 
-    public void setIdZaiv(String idZaiv) {
-        this.idZaiv = idZaiv;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
 
     public String getDate() {
         return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public String getNameObj() {
@@ -122,48 +100,27 @@ public class TableStatusCell {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getPower() {
         return power;
     }
 
-    public void setPower(String power) {
-        this.power = power;
-    }
 
     public String getVoltage() {
         return voltage;
     }
 
-    public void setVoltage(String voltage) {
-        this.voltage = voltage;
-    }
 
     public String getComment() {
         return comment;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
     public String getStatus() {
-        status = status.replace("<p>", "");
+        status = status.replace("\n", " ");
         return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }

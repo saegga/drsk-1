@@ -21,6 +21,7 @@
         <activity android:name=".activity.RegistrationActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activity.ActivityStatusFiles"/>
         <activity android:name=".activity.FileChooseActivity"/>
+        <activity android:name=".activity.ActivityAddApp" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

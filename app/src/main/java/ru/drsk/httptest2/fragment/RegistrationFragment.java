@@ -44,8 +44,8 @@ public class RegistrationFragment extends Fragment {
         Fragment fragment = null;
         switch (position){
             case 0 : fragment = new RegIndividualFragment(); break;
-            case 1 : fragment = new RegBusinessFragment(); break;
-            case 2 : fragment = new RegCorporateFragment(); break;
+            case 1 : fragment = new RegCorporateFragment(); break;
+            //case 2 : fragment = new RegCorporateFragment(); break;
         }
                 manager
                 .beginTransaction()

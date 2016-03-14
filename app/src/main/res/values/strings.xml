@@ -16,7 +16,6 @@
     <string name="back">назад к авторизации</string>
     <string-array name="type_subject">
         <item>Физическое лицо</item>
-        <item>Индивидуальный предприниматель</item>
         <item>Юридическое лицо</item>
     </string-array>
      <string name="agree_for_registration">Согласен на обработку своих персональных данных в соответствии с Федеральным законом РФ от 27.07.2006 г. №152-ФЗ «О персональных данных».
@@ -64,4 +63,13 @@
     <string name="raion_org">Укажите район города или региона, если присутствует деление на районы</string>
     <string name="raion">Район организации</string>
     <string name="ogrn_corp">ОГРН из ЕГРЮЛ</string>
+    <string name="name_obj">Наименование объекта: </string>
+    <string name="date_app">Дата подачи заявки: </string>
+    <string name="address">Адрес присоединения \nобъекта :</string>
+    <string name="status">Статус заявки: </string>
+    <string name="type">Тип технологического \nприсоединения: </string>
+    <string name="our_comment">Ваш комментарий \nк заявке: </string>
+    <string name="power">Запрашиваемая \nмощность кВт: </string>
+    <string name="voltage">Напряжение, кВ: </string>
+    <string name="new_app">Новая заявка</string>
 </resources>

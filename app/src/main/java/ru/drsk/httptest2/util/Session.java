@@ -17,6 +17,10 @@ public class Session {
         return instance;
     }
 
+    public void deleteSession(){
+        instance = null;
+        sessionId = null;
+    }
     public String getSessionId() {
         return sessionId;
     }

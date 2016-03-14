@@ -30,13 +30,15 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Наименование объекта " />
+                    android:text="@string/name_obj"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/name_obj"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Тестовый объект" />
+                    android:text="Тестовый объект"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <LinearLayout
@@ -52,13 +54,15 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Дата подачи заявки: " />
+                    android:text="@string/date_app"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="21.05.12" />
+                    android:text="21.05.12"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <LinearLayout
@@ -72,52 +76,56 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Адрес присоединения \nобъекта : " />
+                    android:text="@string/address"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Новое присоединение" />
+                    android:text="Новое присоединение"
+                    android:textColor="@color/black" />
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/btn_lin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/lin3">
 
-                <Button
-                    android:id="@+id/add_files_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:padding="5dp"
-                    android:textColor="@color/black"
-                    android:background="@drawable/button_add_file"
-                    android:text="Добавить файлы"
-                    android:textSize="8sp" />
-            </LinearLayout>
             <LinearLayout
                 android:id="@+id/lin4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/btn_lin"
-                android:layout_marginBottom="5dp"
+                android:layout_below="@id/lin3"
                 android:orientation="horizontal">
 
-                <TextView
-
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Статус заявки " />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/status"
+                        android:textColor="@color/black" />
+
+                    <Button
+                        android:id="@+id/add_files_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:background="@drawable/button_add_file"
+                        android:padding="5dp"
+                        android:text="@string/add_file"
+                        android:textColor="@color/black"
+                        android:textSize="10sp" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="На регистрации " />
+                    android:text="На регистрации "
+                    android:textColor="@color/black" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/toggle_linear"
                 android:layout_width="wrap_content"
@@ -134,14 +142,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Тип технологического \nприсоединения" />
+                        android:text="@string/type"
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Увеличение присоединенной мощности" />
+                        android:text="Увеличение присоединенной мощности"
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -153,14 +163,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ваш комментарий \nк заявке:" />
+                        android:text="@string/our_comment"
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/comment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Комментарий" />
+                        android:text="Комментарий"
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -172,14 +184,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Запрашиваемая \nмощность кВт:" />
+                        android:text="@string/power"
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/power"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="12 кВт" />
+                        android:text="12 кВт"
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -190,14 +204,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Напряжение, кВ: " />
+                        android:text="@string/voltage"
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/voltage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="12 кВт" />
+                        android:text="12 кВт"
+                        android:textColor="@color/black" />
                 </LinearLayout>
             </LinearLayout>
 

@@ -54,8 +54,7 @@ public class AuthContainerFragment extends Fragment {
         Fragment fragment = null;
         switch (position){
             case 0 : fragment = new AuthIndividual(); break;
-//            case 1 : fragment = new BusinessFragment(); break;
-            case 2 : fragment = new AuthCorporate(); break;
+            case 1 : fragment = new AuthCorporate(); break;
         }
         manager
                 .beginTransaction()

@@ -1,22 +1,14 @@
 package ru.drsk.httptest2.activity;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -29,7 +21,6 @@ import java.util.List;
 import ru.drsk.httptest2.R;
 import ru.drsk.httptest2.adapter.CardViewAdapter;
 import ru.drsk.httptest2.pojo.TableStatusCell;
-import ru.drsk.httptest2.pojo.TextElement;
 import ru.drsk.httptest2.util.ConstantRequest;
 import ru.drsk.httptest2.util.Session;
 
@@ -44,7 +35,8 @@ public class TableStatusActivity extends AppCompatActivity {
     private ProgressDialog dialog;
     private CardViewAdapter cardViewAdapter;
     private Session session = Session.getInstance();
-
+    private AsyncTaskNetworkRequest asyncTaskNetworkRequest;
+    private static final String TAG = "TableStatusActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +47,34 @@ public class TableStatusActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("Личный кабинет");
         }
         session.setSessionId(getIntent().getStringExtra(ConstantRequest.EXTRA_PHP_SESSION));
-        new AsyncTaskNetworkRequest().execute(session.getSessionId());
+        asyncTaskNetworkRequest = new AsyncTaskNetworkRequest();
+        asyncTaskNetworkRequest.execute(session.getSessionId());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Session.getInstance().deleteSession();
+        asyncTaskNetworkRequest.cancel(false);
+    }
+//  TODO: 13.03.2016 test cancel AsyncTask
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_add, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.add_app:
+                Intent i = new Intent(TableStatusActivity.this, ActivityAddApp.class);
+                startActivity(i);
+                return true;
+            default: return super.onOptionsItemSelected(item);
+        }
 
     }
 
@@ -70,6 +89,9 @@ public class TableStatusActivity extends AppCompatActivity {
         protected Document doInBackground(String... params) {
             Document doc = null;
             try {
+                if(isCancelled()){
+                    return null;
+                }
                 String sessionId = params[0];
                 doc = getHtml(sessionId);
             } catch (IOException e) {
@@ -82,6 +104,9 @@ public class TableStatusActivity extends AppCompatActivity {
         protected void onPostExecute(Document document) {
             if (!TableStatusActivity.this.isDestroyed()) {
                 dismissDialog();
+            }
+            if(document == null){
+                return;
             }
             dataList = parseData(document);
             cardViewAdapter = new CardViewAdapter(dataList, getApplicationContext());
@@ -134,6 +159,7 @@ public class TableStatusActivity extends AppCompatActivity {
         }
         return list;
     }
+
 }
 
 
